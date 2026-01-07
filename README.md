@@ -11,6 +11,8 @@
 ![React](https://img.shields.io/badge/React-Dashboard-A3B8CC?style=flat-square&logo=react&logoColor=0D1B2A)
 ![Python](https://img.shields.io/badge/Python-Backend-A3B8CC?style=flat-square&logo=python&logoColor=0D1B2A)
 
+[Architecture](ARCHITECTURE.md)
+
 </div>
 
 ---
