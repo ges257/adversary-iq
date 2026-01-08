@@ -1,3 +1,15 @@
+---
+title: AdversaryIQ
+emoji: 🎯
+colorFrom: amber
+colorTo: red
+sdk: gradio
+sdk_version: 4.0.0
+app_file: frontend_gradio/app.py
+pinned: false
+license: mit
+---
+
 ![Header](https://capsule-render.vercel.app/api?type=rect&color=0D1B2A&height=120&text=AdversaryIQ&fontSize=40&fontColor=A78BFA&fontAlign=50&fontAlignY=50)
 
 <div align="center">
@@ -6,7 +18,7 @@
 
 *Geopolitical crisis simulation through AI-powered world leader personas*
 
-[![Demo](https://img.shields.io/badge/▶_Live_Demo-Gradio-A78BFA?style=for-the-badge&logo=python&logoColor=white)](#demo)
+[![Demo](https://img.shields.io/badge/▶_Live_Demo-HuggingFace-A78BFA?style=for-the-badge&logo=huggingface&logoColor=white)](https://huggingface.co/spaces/ges257/adversary-iq)
 [![Hackathon](https://img.shields.io/badge/🏆_AI+_Expo-48hr_Build-A78BFA?style=for-the-badge)](#origin)
 
 ![GPT-4o-mini](https://img.shields.io/badge/GPT--4o--mini-Agent_Core-A3B8CC?style=flat-square&logo=openai&logoColor=0D1B2A)
