@@ -2,7 +2,7 @@
 title: AdversaryIQ
 emoji: 🎯
 colorFrom: amber
-colorTo: cyan
+colorTo: red
 sdk: gradio
 sdk_version: 4.0.0
 app_file: app.py
@@ -10,90 +10,81 @@ pinned: false
 license: mit
 ---
 
-# AdversaryIQ - Diplomatic Intelligence Platform
+# AdversaryIQ - Multi-Agent Psychological Intelligence Platform
 
-A multi-agent psychological simulation system that models how historical world leaders would respond to modern diplomatic crises.
+A geopolitical crisis simulation system that models how historical world leaders would respond to modern diplomatic scenarios.
 
 ## Overview
 
-AdversaryIQ leverages psychological profiling and multi-agent orchestration to simulate responses from three distinct leadership archetypes:
+AdversaryIQ leverages psychological profiling (OCEAN/Big Five) and multi-agent orchestration to simulate responses from three distinct leadership archetypes:
 
-- **Theodore Roosevelt** — American pragmatic idealism
-- **Indira Gandhi** — Strategic non-alignment and regional power projection
-- **Vladimir Putin** — Calculated realpolitik and asymmetric leverage
-
-Each agent processes diplomatic scenarios through evidence-based psychological frameworks, generating both public responses and private strategic calculus.
+| Agent | Archetype | Key Traits |
+|-------|-----------|------------|
+| **Theodore Roosevelt** | American Pragmatic Idealism | High extraversion, low agreeableness, moral leadership with hard power |
+| **Indira Gandhi** | Strategic Non-Alignment | High conscientiousness, methodical crisis response, national interest priority |
+| **Vladimir Putin** | Calculated Realpolitik | Low agreeableness, zero-sum worldview, asymmetric leverage |
 
 ## Features
 
-### Psychological Analysis Dimensions
+### Crisis Analysis
+- Enter any diplomatic crisis scenario
+- Three AI agents analyze through unique psychological lenses
+- Each provides public response, private actions, and psychological reasoning
 
-| Dimension | Description |
-|-----------|-------------|
-| **Public Response** | Official statements the leader would release |
-| **Private Actions** | Behind-the-scenes strategic moves |
-| **Psychological Reasoning** | Big Five + core beliefs driving behavior |
-| **Escalation Analysis** | Position on crisis escalation ladder |
-| **Belief Impact** | How crisis affects worldview |
+### Document Analysis
+- Analyze diplomatic documents for hidden meanings
+- Detect psychological tactics and manipulation techniques
+- Authenticity assessment from each perspective
 
-### Intelligence Output
+### Voice Synthesis
+- Generate voice audio for each agent's public response
+- Powered by ElevenLabs TTS
 
-- Multi-perspective crisis analysis
-- Risk assessment scoring
-- Key strategic insights synthesis
-- Timeline and decision confidence metrics
+### Executive Summary
+- Dynamic BLUF (Bottom Line Up Front) per scenario
+- Risk assessment synthesized from all agents
 
-## Architecture
+## Design Theme
 
-```
-┌─────────────────────────────────────────┐
-│         Gradio Frontend (HF Spaces)     │
-│    ┌───────────────────────────────┐    │
-│    │  Crisis Input → API Client    │    │
-│    └───────────────┬───────────────┘    │
-└────────────────────┼────────────────────┘
-                     │
-                     ▼
-┌─────────────────────────────────────────┐
-│          Backend API Server             │
-│  ┌───────────────────────────────────┐  │
-│  │    Multi-Agent Orchestrator       │  │
-│  │  ┌─────────┐ ┌─────────┐ ┌─────┐  │  │
-│  │  │Roosevelt│ │ Gandhi  │ │Putin│  │  │
-│  │  └────┬────┘ └────┬────┘ └──┬──┘  │  │
-│  │       └───────────┼─────────┘     │  │
-│  │                   ▼               │  │
-│  │     Psychological Profile Engine  │  │
-│  └───────────────────────────────────┘  │
-└─────────────────────────────────────────┘
-```
+**Classified Dossier** aesthetic inspired by declassified CIA/NSC documents:
+- Paper texture background
+- Typewriter fonts (Courier Prime)
+- TOP SECRET stamps and classification banners
+- Roman numeral section headers
+- Signature lines and date stamps
 
 ## Configuration
 
-Set the `API_URL` environment variable to point to your backend API:
+Set the `API_URL` secret to point to your deployed backend:
 
 ```
 API_URL=https://your-backend-api.com
 ```
 
+Without a backend, the demo will show "Offline" status.
+
 ## Example Scenarios
 
-Try these crisis scenarios:
+1. *"North Korea establishes a new forward military base just 12 kilometers from the South Korean border"*
+2. *"Chinese naval forces begin encircling Taiwan with a maritime blockade"*
+3. *"Your neighbor's golden retriever has been spotted in the HOA president's rose garden"* (humor test)
 
-1. "Russia announces energy export restrictions following EU semiconductor sanctions"
-2. "North Korea tests a new long-range missile system during US-South Korea military exercises"
-3. "China establishes a new military base in the South China Sea near disputed waters"
-4. "Iran threatens to close the Strait of Hormuz in response to new oil sanctions"
+## Architecture
 
-## Design Philosophy
+```
+Frontend (Gradio/HF Spaces)     Backend (Node.js)
+┌─────────────────────────┐     ┌─────────────────────────┐
+│  Crisis/Document Input  │────▶│  Multi-Agent Engine     │
+│  Dossier Theme UI       │     │  - Roosevelt Agent      │
+│  Voice Playback         │◀────│  - Gandhi Agent         │
+└─────────────────────────┘     │  - Putin Agent          │
+                                │  GPT-4o-mini + ElevenLabs│
+                                └─────────────────────────┘
+```
 
-The interface deliberately evokes classified intelligence briefing software:
+## Origin
 
-- **Dark terminal aesthetic** — Professional, serious tone
-- **Monospace typography** — Technical credibility
-- **Color-coded agents** — Instant visual differentiation
-- **BLUF format** — Military intelligence conventions
-- **Classification banners** — Immersive context
+Built in **48 hours** at the **AI+ Expo Hackathon** (OpenAI Track), Washington D.C.
 
 ## License
 
@@ -101,4 +92,4 @@ MIT
 
 ---
 
-*Built for portfolio demonstration purposes. The psychological profiles are simplified models for simulation and do not represent actual intelligence assessments.*
+*Psychological profiles are simplified models for demonstration purposes only.*

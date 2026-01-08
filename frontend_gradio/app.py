@@ -8,6 +8,8 @@ Inspired by declassified CIA/NSC documents.
 import gradio as gr
 import requests
 import os
+import tempfile
+import base64
 from datetime import datetime
 
 # Configuration
@@ -34,7 +36,17 @@ DOSSIER_CSS = """
     max-width: 900px !important;
     margin: 0 auto !important;
 }
+
+.voice-btn {
+    background: #8B4513 !important;
+    color: white !important;
+    font-size: 11px !important;
+    letter-spacing: 1px !important;
+}
 """
+
+# Store last response for voice synthesis
+last_crisis_response = {}
 
 
 def format_agent_dossier(agent_key: str, agent_data: dict) -> str:
@@ -280,12 +292,13 @@ def format_executive_summary(data: dict) -> str:
     return html
 
 
-def process_crisis(crisis_text: str) -> tuple:
+def process_crisis(crisis_text: str, state: dict) -> tuple:
     """Process crisis through backend API."""
+    global last_crisis_response
 
     if not crisis_text or not crisis_text.strip():
         empty = "<div style='padding: 40px; text-align: center; color: #888; font-style: italic;'>Enter a crisis scenario above to begin analysis.</div>"
-        return empty, empty, empty, empty, "Awaiting input..."
+        return empty, empty, empty, empty, "Awaiting input...", {}
 
     try:
         response = requests.post(
@@ -297,27 +310,63 @@ def process_crisis(crisis_text: str) -> tuple:
 
         if response.status_code != 200:
             error = f"<div style='padding: 20px; border: 2px solid #8b0000; color: #8b0000;'>API Error: {response.status_code}</div>"
-            return error, error, error, error, f"Error: {response.status_code}"
+            return error, error, error, error, f"Error: {response.status_code}", {}
 
         data = response.json()
         agents = data.get('agents', {})
+
+        # Store response for voice synthesis
+        last_crisis_response = agents
 
         roosevelt = format_agent_dossier('roosevelt', agents.get('roosevelt'))
         gandhi = format_agent_dossier('gandhi', agents.get('gandhi'))
         putin = format_agent_dossier('putin', agents.get('putin'))
         summary = format_executive_summary(data)
 
-        return roosevelt, gandhi, putin, summary, "Analysis complete"
+        return roosevelt, gandhi, putin, summary, "Analysis complete", agents
 
     except requests.exceptions.Timeout:
         error = "<div style='padding: 20px; border: 2px solid #8B4513; color: #8B4513;'>Request timed out. Please try again.</div>"
-        return error, error, error, error, "Timeout"
+        return error, error, error, error, "Timeout", {}
     except requests.exceptions.ConnectionError:
         error = f"<div style='padding: 20px; border: 2px solid #8b0000; color: #8b0000;'>Cannot connect to API at {API_URL}</div>"
-        return error, error, error, error, "Connection failed"
+        return error, error, error, error, "Connection failed", {}
     except Exception as e:
         error = f"<div style='padding: 20px; border: 2px solid #8b0000; color: #8b0000;'>Error: {str(e)}</div>"
-        return error, error, error, error, f"Error: {str(e)}"
+        return error, error, error, error, f"Error: {str(e)}", {}
+
+
+def synthesize_voice(agent: str, state: dict) -> str:
+    """Synthesize voice for agent's public response."""
+
+    if not state or agent not in state:
+        return None
+
+    agent_data = state.get(agent, {})
+    text = agent_data.get('public_response', '')
+
+    if not text or text == 'Awaiting analysis...':
+        return None
+
+    try:
+        response = requests.post(
+            f"{API_URL}/api/synthesize-voice",
+            json={"text": text, "agent": agent},
+            headers={"Content-Type": "application/json"},
+            timeout=60
+        )
+
+        if response.status_code != 200:
+            return None
+
+        # Save audio to temp file
+        with tempfile.NamedTemporaryFile(suffix=".mp3", delete=False) as f:
+            f.write(response.content)
+            return f.name
+
+    except Exception as e:
+        print(f"Voice synthesis error: {e}")
+        return None
 
 
 def analyze_document(document_text: str) -> tuple:
@@ -368,6 +417,9 @@ def check_api_health() -> str:
 # ============================================================================
 
 with gr.Blocks(title="AdversaryIQ - Intelligence Dossier", css=DOSSIER_CSS) as app:
+
+    # State for storing response data
+    response_state = gr.State({})
 
     # Header with TOP SECRET stamp
     gr.HTML("""
@@ -478,10 +530,21 @@ with gr.Blocks(title="AdversaryIQ - Intelligence Dossier", css=DOSSIER_CSS) as a
             with gr.Tabs():
                 with gr.Tab("ROOSEVELT"):
                     crisis_roosevelt = gr.HTML(value="<div style='padding: 40px; text-align: center; color: #888; font-style: italic;'>Enter a crisis scenario above to begin analysis.</div>")
+                    with gr.Row():
+                        voice_roosevelt_btn = gr.Button("🔊 GENERATE VOICE", size="sm", elem_classes=["voice-btn"])
+                    audio_roosevelt = gr.Audio(label="Voice Synthesis", visible=True, interactive=False)
+
                 with gr.Tab("GANDHI"):
                     crisis_gandhi = gr.HTML(value="<div style='padding: 40px; text-align: center; color: #888; font-style: italic;'>Enter a crisis scenario above to begin analysis.</div>")
+                    with gr.Row():
+                        voice_gandhi_btn = gr.Button("🔊 GENERATE VOICE", size="sm", elem_classes=["voice-btn"])
+                    audio_gandhi = gr.Audio(label="Voice Synthesis", visible=True, interactive=False)
+
                 with gr.Tab("PUTIN"):
                     crisis_putin = gr.HTML(value="<div style='padding: 40px; text-align: center; color: #888; font-style: italic;'>Enter a crisis scenario above to begin analysis.</div>")
+                    with gr.Row():
+                        voice_putin_btn = gr.Button("🔊 GENERATE VOICE", size="sm", elem_classes=["voice-btn"])
+                    audio_putin = gr.Audio(label="Voice Synthesis", visible=True, interactive=False)
 
             # Section III: Executive Summary
             gr.HTML("""
@@ -569,8 +632,8 @@ with gr.Blocks(title="AdversaryIQ - Intelligence Dossier", css=DOSSIER_CSS) as a
 
     analyze_btn.click(
         fn=process_crisis,
-        inputs=[crisis_input],
-        outputs=[crisis_roosevelt, crisis_gandhi, crisis_putin, crisis_summary, status_text]
+        inputs=[crisis_input, response_state],
+        outputs=[crisis_roosevelt, crisis_gandhi, crisis_putin, crisis_summary, status_text, response_state]
     )
 
     clear_btn.click(
@@ -579,9 +642,30 @@ with gr.Blocks(title="AdversaryIQ - Intelligence Dossier", css=DOSSIER_CSS) as a
                     "<div style='padding: 40px; text-align: center; color: #888; font-style: italic;'>Enter a crisis scenario above to begin analysis.</div>",
                     "<div style='padding: 40px; text-align: center; color: #888; font-style: italic;'>Enter a crisis scenario above to begin analysis.</div>",
                     "<div style='padding: 40px; text-align: center; color: #888; font-style: italic;'>Submit a crisis scenario to generate executive intelligence summary.</div>",
-                    check_api_health()),
+                    check_api_health(),
+                    {},
+                    None, None, None),
         inputs=[],
-        outputs=[crisis_input, crisis_roosevelt, crisis_gandhi, crisis_putin, crisis_summary, status_text]
+        outputs=[crisis_input, crisis_roosevelt, crisis_gandhi, crisis_putin, crisis_summary, status_text, response_state, audio_roosevelt, audio_gandhi, audio_putin]
+    )
+
+    # Voice synthesis handlers
+    voice_roosevelt_btn.click(
+        fn=lambda state: synthesize_voice("roosevelt", state),
+        inputs=[response_state],
+        outputs=[audio_roosevelt]
+    )
+
+    voice_gandhi_btn.click(
+        fn=lambda state: synthesize_voice("gandhi", state),
+        inputs=[response_state],
+        outputs=[audio_gandhi]
+    )
+
+    voice_putin_btn.click(
+        fn=lambda state: synthesize_voice("putin", state),
+        inputs=[response_state],
+        outputs=[audio_putin]
     )
 
     analyze_doc_btn.click(
