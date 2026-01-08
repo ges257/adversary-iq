@@ -2,16 +2,19 @@
 
 <div align="center">
 
-**Autonomous Red Team Agent for Enterprise Threat Simulation**
+**Multi-Agent Psychological Intelligence Platform**
 
-[![Access](https://img.shields.io/badge/🔒_Code_Private-Proprietary_IP-red?style=for-the-badge)]
-[![Watch Demo](https://img.shields.io/badge/▶_Watch_Video-Demo-A78BFA?style=for-the-badge&logo=youtube&logoColor=white)](#demo)
+*Geopolitical crisis simulation through AI-powered world leader personas*
 
-![GPT-4](https://img.shields.io/badge/GPT--4-Agent_Core-A3B8CC?style=flat-square&logo=openai&logoColor=0D1B2A)
-![React](https://img.shields.io/badge/React-Dashboard-A3B8CC?style=flat-square&logo=react&logoColor=0D1B2A)
-![Python](https://img.shields.io/badge/Python-Backend-A3B8CC?style=flat-square&logo=python&logoColor=0D1B2A)
+[![Demo](https://img.shields.io/badge/▶_Live_Demo-Gradio-A78BFA?style=for-the-badge&logo=python&logoColor=white)](#demo)
+[![Hackathon](https://img.shields.io/badge/🏆_AI+_Expo-48hr_Build-A78BFA?style=for-the-badge)](#origin)
 
-[Architecture](ARCHITECTURE.md)
+![GPT-4o-mini](https://img.shields.io/badge/GPT--4o--mini-Agent_Core-A3B8CC?style=flat-square&logo=openai&logoColor=0D1B2A)
+![Node.js](https://img.shields.io/badge/Node.js-Backend-A3B8CC?style=flat-square&logo=node.js&logoColor=0D1B2A)
+![Python](https://img.shields.io/badge/Python-Frontend-A3B8CC?style=flat-square&logo=python&logoColor=0D1B2A)
+![ElevenLabs](https://img.shields.io/badge/ElevenLabs-Voice-A3B8CC?style=flat-square&logo=audio&logoColor=0D1B2A)
+
+[Architecture](ARCHITECTURE.md) • [Challenges](CHALLENGES.md) • [Learnings](LEARNINGS.md) • [Deployment](DEPLOYMENT.md)
 
 </div>
 
@@ -19,106 +22,187 @@
 
 ## Overview
 
-**AdversaryIQ** is an autonomous AI-powered red team agent designed for enterprise threat simulation. The system generates realistic adversarial scenarios, executes multi-step attack chains, and provides actionable remediation guidance.
+**AdversaryIQ** simulates how historical world leaders would respond to modern diplomatic crises. Each agent embodies a distinct psychological profile—Roosevelt, Gandhi, Putin—producing divergent strategic recommendations based on personality traits, decision-making patterns, and psychological frameworks.
 
-* **Outcome:** Automated threat simulation reducing manual red team effort by 80%
-* **Constraint:** Source code is proprietary and cannot be shared publicly
-
----
-
-## The Problem
-
-Traditional red team engagements are:
-- **Expensive:** Senior security consultants at $300-500/hour
-- **Slow:** Weeks of manual testing and report writing
-- **Inconsistent:** Quality varies by practitioner expertise
-
----
-
-## The Solution
-
-AdversaryIQ automates the adversarial thinking process:
-
-```
-Threat Intel → Attack Planning → Simulation → Impact Analysis → Remediation
-```
-
-| Stage | Capability |
-|-------|------------|
-| **Reconnaissance** | Automated OSINT gathering and attack surface mapping |
-| **Planning** | LLM-powered attack chain generation based on MITRE ATT&CK |
-| **Simulation** | Controlled execution of realistic threat scenarios |
-| **Reporting** | Automated finding documentation with remediation priorities |
+| Metric | Value |
+|--------|-------|
+| **Build Time** | 48 hours (hackathon sprint) |
+| **Event** | SCSP AI Expo, Washington D.C. |
+| **Latency** | <200ms concurrent multi-agent state |
+| **Pipeline** | 7-stage decision architecture |
+| **Validation** | Real-time stability under high-stress simulation loads |
 
 ---
 
 ## Demo
 
-*Video demonstration coming soon*
+![Demo](docs/demo-placeholder.gif)
+
+*Crisis analysis through three psychological lenses*
+
+The platform features a **Classified Dossier** theme inspired by declassified CIA/NSC documents:
+- Paper texture backgrounds
+- Typewriter fonts (Courier Prime)
+- TOP SECRET stamps and classification banners
+- Roman numeral section headers
 
 ---
 
-## High-Level Architecture
+## The Problem
+
+Geopolitical crisis response is opaque:
+- **Unpredictable:** How would different leadership styles respond to the same scenario?
+- **Unstructured:** No framework for comparing psychological approaches
+- **Inaccessible:** Intelligence analysis methods aren't available to researchers
+
+---
+
+## The Solution
+
+AdversaryIQ applies psychological profiling to generate deterministic, archetype-consistent responses:
+
+```
+Crisis Input → OCEAN Scoring → Historical Context → Escalation Dynamics → Multi-Agent Response
+```
+
+### Agent Profiles
+
+| Agent | Archetype | Key Traits |
+|-------|-----------|------------|
+| **Theodore Roosevelt** | American Pragmatic Idealism | High extraversion, low agreeableness, moral leadership with hard power backup |
+| **Indira Gandhi** | Strategic Non-Alignment | High conscientiousness, methodical crisis response, national interest priority |
+| **Vladimir Putin** | Calculated Realpolitik | Low agreeableness, zero-sum worldview, asymmetric leverage maximization |
+
+---
+
+## Architecture
 
 ```mermaid
 graph TD
-    subgraph Input["Threat Intelligence"]
-        A1[MITRE ATT&CK]
-        A2[CVE Databases]
-        A3[Client Environment]
+    subgraph Input["Crisis Scenario"]
+        A1[User Input]
+        A2[Document Upload]
     end
 
-    subgraph Core["AdversaryIQ Engine"]
-        B1[GPT-4 Agent]
-        B2[Attack Planner]
-        B3[Simulation Engine]
+    subgraph Pipeline["7-Stage Decision Pipeline"]
+        B1[OCEAN Personality Scoring]
+        B2[Historical Pattern Matching]
+        B3[Belief System Injection]
+        B4[Escalation Ladder Dynamics]
+        B5[Communication Style]
+        B6[Value Hierarchy]
+        B7[Response Synthesis]
     end
 
-    subgraph Output["Deliverables"]
-        C1[Attack Chains]
-        C2[Impact Analysis]
-        C3[Remediation Plan]
+    subgraph Output["Intelligence Assessment"]
+        C1[Public Response]
+        C2[Private Actions]
+        C3[Psychological Reasoning]
+        C4[Executive Summary]
     end
 
-    Input --> Core --> Output
+    Input --> Pipeline --> Output
 
-    style Core fill:#0D1B2A,stroke:#A78BFA,color:#A3B8CC
+    style Pipeline fill:#0D1B2A,stroke:#A78BFA,color:#A3B8CC
 ```
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for detailed system topology.
 
 ---
 
-## Key Capabilities
-
-| Capability | Description |
-|------------|-------------|
-| **Autonomous Planning** | Multi-step attack chain generation without human intervention |
-| **MITRE Mapping** | All scenarios mapped to ATT&CK techniques for compliance |
-| **Risk Scoring** | Quantified impact assessment with CVSS-like scoring |
-| **Safe Simulation** | Controlled execution that never touches production systems |
-
----
-
 ## Technical Stack
 
-- **Agent Core:** GPT-4 with custom system prompts and tool use
-- **Backend:** Python, FastAPI
-- **Frontend:** React, TypeScript
-- **Data:** MITRE ATT&CK, NVD, custom threat intelligence
+| Layer | Technology | Purpose |
+|-------|------------|---------|
+| **LLM** | GPT-4o-mini | Optimized for speed vs. cost tradeoff |
+| **Backend** | Node.js, Express | Async state management, race condition prevention |
+| **Frontend** | Gradio (Python) | Classified dossier UI theme |
+| **Voice** | ElevenLabs | Real-time voice synthesis per agent |
+| **Profiles** | JSON | OCEAN scores, beliefs, historical patterns |
 
 ---
 
-## Access
+## Key Features
 
-This project contains proprietary intellectual property and is not available as open source.
+### Crisis Analysis
+- Enter any diplomatic crisis scenario
+- Three agents analyze through unique psychological lenses
+- Each provides:
+  - **Public Response** — Official statements
+  - **Private Actions** — Behind-the-scenes moves
+  - **Psychological Reasoning** — Big Five traits driving behavior
+  - **Escalation Phase** — Position on crisis ladder
 
-For inquiries about AdversaryIQ capabilities or partnership opportunities:
+### Document Analysis
+- Analyze diplomatic documents, treaties, communiqués
+- Detect hidden intentions and psychological tactics
+- Authenticity assessment from each perspective
 
-<p align="center">
-  <a href="mailto:gregory.e.schwartz@gmail.com"><img src="https://img.shields.io/badge/Contact-Email-A78BFA?style=for-the-badge&logo=gmail&logoColor=white" /></a>
-  <a href="https://linkedin.com/in/gregory-e-schwartz"><img src="https://img.shields.io/badge/Connect-LinkedIn-A78BFA?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
-</p>
+### Executive Summary
+- Dynamic BLUF (Bottom Line Up Front) per scenario
+- Risk assessment synthesized from all agents
+- Key intelligence findings
+
+---
+
+## Quick Start
+
+```bash
+# Clone repository
+git clone https://github.com/yourusername/adversary-iq.git
+cd adversary-iq
+
+# Backend
+cd backend
+npm install
+cp .env.example .env  # Add your API keys
+node server.js        # Runs on :3001
+
+# Frontend (new terminal)
+cd frontend_gradio
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+API_URL=http://localhost:3001 python app.py  # Runs on :7860
+```
+
+---
+
+## Origin
+
+Built in **48 hours** at the **AI+ Expo Hackathon (OpenAI Track)** in Washington D.C.
+
+- **Team:** 1 engineer (solo code), 1 strategy partner
+- **Result:** Validated by OpenAI sponsor as aligned with their product roadmap
+- **Use Case:** Real-time decision stability for national security simulations
+
+---
+
+## Project Structure
+
+```
+adversary-iq/
+├── backend/                    # Node.js API server
+│   ├── server.js              # Main server with agent orchestration
+│   ├── data/personalities/    # OCEAN profiles and belief systems
+│   └── package.json
+├── frontend_gradio/           # Gradio Python frontend
+│   ├── app.py                 # Classified dossier theme UI
+│   └── requirements.txt
+├── docs/                      # Architecture documentation
+│   ├── architecture/          # System diagrams
+│   └── research/              # Personality validation PDFs
+├── ARCHITECTURE.md            # Technical deep-dive
+├── CHALLENGES.md              # Problems solved
+├── LEARNINGS.md               # Key insights
+└── DEPLOYMENT.md              # Setup guide
+```
+
+---
+
+## Disclaimer
+
+*The psychological profiles in AdversaryIQ are simplified models for demonstration and educational purposes only. They do not represent actual intelligence assessments or predict real-world behavior of any individuals.*
 
 ---
 
@@ -127,6 +211,11 @@ For inquiries about AdversaryIQ capabilities or partnership opportunities:
 **Gregory E. Schwartz**
 - M.S. Artificial Intelligence (Yeshiva University)
 - MBA (Cornell University)
+
+<p align="center">
+  <a href="mailto:gregory.e.schwartz@gmail.com"><img src="https://img.shields.io/badge/Contact-Email-A78BFA?style=for-the-badge&logo=gmail&logoColor=white" /></a>
+  <a href="https://linkedin.com/in/gregory-e-schwartz"><img src="https://img.shields.io/badge/Connect-LinkedIn-A78BFA?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
+</p>
 
 ---
 
