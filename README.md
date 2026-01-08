@@ -1,15 +1,3 @@
----
-title: AdversaryIQ
-emoji: 🎯
-colorFrom: yellow
-colorTo: red
-sdk: gradio
-sdk_version: 4.0.0
-app_file: frontend_gradio/app.py
-pinned: false
-license: mit
----
-
 ![Header](https://capsule-render.vercel.app/api?type=rect&color=0D1B2A&height=120&text=AdversaryIQ&fontSize=40&fontColor=A78BFA&fontAlign=50&fontAlignY=50)
 
 <div align="center">
@@ -18,23 +6,30 @@ license: mit
 
 *Geopolitical crisis simulation through AI-powered world leader personas*
 
-[![Demo](https://img.shields.io/badge/▶_Live_Demo-HuggingFace-A78BFA?style=for-the-badge&logo=huggingface&logoColor=white)](https://huggingface.co/spaces/ges257/adversary-iq)
-[![Hackathon](https://img.shields.io/badge/🏆_AI+_Expo-48hr_Build-A78BFA?style=for-the-badge)](#origin)
+[![Live Demo (Click Here)](https://img.shields.io/badge/Live_Demo_(Click_Here)-HuggingFace-FFD21E?style=for-the-badge&logo=huggingface&logoColor=0D1B2A)](https://huggingface.co/spaces/ges257/adversary-iq)
 
 ![GPT-4o-mini](https://img.shields.io/badge/GPT--4o--mini-Agent_Core-A3B8CC?style=flat-square&logo=openai&logoColor=0D1B2A)
 ![Node.js](https://img.shields.io/badge/Node.js-Backend-A3B8CC?style=flat-square&logo=node.js&logoColor=0D1B2A)
 ![Python](https://img.shields.io/badge/Python-Frontend-A3B8CC?style=flat-square&logo=python&logoColor=0D1B2A)
 ![ElevenLabs](https://img.shields.io/badge/ElevenLabs-Voice-A3B8CC?style=flat-square&logo=audio&logoColor=0D1B2A)
 
-[Architecture](ARCHITECTURE.md) • [Challenges](CHALLENGES.md) • [Learnings](LEARNINGS.md) • [Deployment](DEPLOYMENT.md)
+[Architecture](ARCHITECTURE.md) · [Challenges](CHALLENGES.md) · [Learnings](LEARNINGS.md) · [Deployment](DEPLOYMENT.md)
 
 </div>
 
 ---
 
-## Overview
+## Outcome
 
-**AdversaryIQ** simulates how historical world leaders would respond to modern diplomatic crises. Each agent embodies a distinct psychological profile—Roosevelt, Gandhi, Putin—producing divergent strategic recommendations based on personality traits, decision-making patterns, and psychological frameworks.
+Solo-architected geopolitical crisis engine in **48-hour sprint** for SCSP AI Expo (Eric Schmidt), shipping full-stack MVP that handled concurrent multi-agent state with **<200ms latency**. Validated real-time decision stability under high-stress simulation loads for national security use-cases.
+
+## Technical Build
+
+Engineered **7-stage decision pipeline** using GPT-4o-mini to optimize inference speed vs. cost, injecting OCEAN scoring to force deterministic adherence to historical archetypes. Integrated ElevenLabs for real-time voice synthesis, managing async state via Node.js to prevent race conditions during live simulation.
+
+---
+
+## Results
 
 | Metric | Value |
 |--------|-------|
@@ -42,36 +37,11 @@ license: mit
 | **Event** | SCSP AI Expo, Washington D.C. |
 | **Latency** | <200ms concurrent multi-agent state |
 | **Pipeline** | 7-stage decision architecture |
-| **Validation** | Real-time stability under high-stress simulation loads |
+| **Validation** | Real-time stability under high-stress loads |
 
 ---
 
-## Demo
-
-![Demo](docs/demo-placeholder.gif)
-
-*Crisis analysis through three psychological lenses*
-
-The platform features a **Classified Dossier** theme inspired by declassified CIA/NSC documents:
-- Paper texture backgrounds
-- Typewriter fonts (Courier Prime)
-- TOP SECRET stamps and classification banners
-- Roman numeral section headers
-
----
-
-## The Problem
-
-Geopolitical crisis response is opaque:
-- **Unpredictable:** How would different leadership styles respond to the same scenario?
-- **Unstructured:** No framework for comparing psychological approaches
-- **Inaccessible:** Intelligence analysis methods aren't available to researchers
-
----
-
-## The Solution
-
-AdversaryIQ applies psychological profiling to generate deterministic, archetype-consistent responses:
+## How It Works
 
 ```
 Crisis Input → OCEAN Scoring → Historical Context → Escalation Dynamics → Multi-Agent Response
@@ -81,9 +51,9 @@ Crisis Input → OCEAN Scoring → Historical Context → Escalation Dynamics �
 
 | Agent | Archetype | Key Traits |
 |-------|-----------|------------|
-| **Theodore Roosevelt** | American Pragmatic Idealism | High extraversion, low agreeableness, moral leadership with hard power backup |
+| **Theodore Roosevelt** | American Pragmatic Idealism | High extraversion, low agreeableness, moral leadership with hard power |
 | **Indira Gandhi** | Strategic Non-Alignment | High conscientiousness, methodical crisis response, national interest priority |
-| **Vladimir Putin** | Calculated Realpolitik | Low agreeableness, zero-sum worldview, asymmetric leverage maximization |
+| **Vladimir Putin** | Calculated Realpolitik | Low agreeableness, zero-sum worldview, asymmetric leverage |
 
 ---
 
@@ -122,46 +92,55 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for detailed system topology.
 
 ---
 
-## Technical Stack
-
-| Layer | Technology | Purpose |
-|-------|------------|---------|
-| **LLM** | GPT-4o-mini | Optimized for speed vs. cost tradeoff |
-| **Backend** | Node.js, Express | Async state management, race condition prevention |
-| **Frontend** | Gradio (Python) | Classified dossier UI theme |
-| **Voice** | ElevenLabs | Real-time voice synthesis per agent |
-| **Profiles** | JSON | OCEAN scores, beliefs, historical patterns |
-
----
-
 ## Key Features
 
 ### Crisis Analysis
 - Enter any diplomatic crisis scenario
 - Three agents analyze through unique psychological lenses
-- Each provides:
-  - **Public Response** — Official statements
-  - **Private Actions** — Behind-the-scenes moves
-  - **Psychological Reasoning** — Big Five traits driving behavior
-  - **Escalation Phase** — Position on crisis ladder
+- Each provides: Public Response, Private Actions, Psychological Reasoning, Escalation Phase
 
 ### Document Analysis
-- Analyze diplomatic documents, treaties, communiqués
-- Detect hidden intentions and psychological tactics
+- Analyze diplomatic documents for hidden intentions
+- Detect psychological tactics and manipulation techniques
 - Authenticity assessment from each perspective
 
-### Executive Summary
-- Dynamic BLUF (Bottom Line Up Front) per scenario
-- Risk assessment synthesized from all agents
-- Key intelligence findings
+### Voice Synthesis
+- Generate voice audio for each agent's public response
+- Powered by ElevenLabs TTS
+
+### Design Theme
+**Classified Dossier** aesthetic inspired by declassified CIA/NSC documents:
+- Paper texture backgrounds
+- Typewriter fonts (Courier Prime)
+- TOP SECRET stamps and classification banners
+- Roman numeral section headers
 
 ---
 
-## Quick Start
+## Project Structure
+
+```
+adversary-iq/
+├── backend/                    # Node.js API server
+│   ├── server.js              # Multi-agent orchestrator
+│   ├── data/personalities/    # OCEAN profiles, belief systems
+│   └── package.json
+├── frontend_gradio/           # Gradio Python frontend
+│   ├── app.py                 # Dossier theme UI
+│   └── requirements.txt
+├── docs/                      # Architecture documentation
+├── ARCHITECTURE.md            # System design
+├── CHALLENGES.md              # Problems solved
+└── LEARNINGS.md               # Key insights
+```
+
+---
+
+## Usage
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/adversary-iq.git
+git clone https://github.com/ges257/adversary-iq.git
 cd adversary-iq
 
 # Backend
@@ -180,35 +159,12 @@ API_URL=http://localhost:3001 python app.py  # Runs on :7860
 
 ---
 
-## Origin
+## Documentation
 
-Built in **48 hours** at the **AI+ Expo Hackathon (OpenAI Track)** in Washington D.C.
-
-- **Team:** 1 engineer (solo code), 1 strategy partner
-- **Result:** Validated by OpenAI sponsor as aligned with their product roadmap
-- **Use Case:** Real-time decision stability for national security simulations
-
----
-
-## Project Structure
-
-```
-adversary-iq/
-├── backend/                    # Node.js API server
-│   ├── server.js              # Main server with agent orchestration
-│   ├── data/personalities/    # OCEAN profiles and belief systems
-│   └── package.json
-├── frontend_gradio/           # Gradio Python frontend
-│   ├── app.py                 # Classified dossier theme UI
-│   └── requirements.txt
-├── docs/                      # Architecture documentation
-│   ├── architecture/          # System diagrams
-│   └── research/              # Personality validation PDFs
-├── ARCHITECTURE.md            # Technical deep-dive
-├── CHALLENGES.md              # Problems solved
-├── LEARNINGS.md               # Key insights
-└── DEPLOYMENT.md              # Setup guide
-```
+- [ARCHITECTURE.md](ARCHITECTURE.md) - 7-stage pipeline and system design
+- [CHALLENGES.md](CHALLENGES.md) - Problems solved and trade-offs
+- [LEARNINGS.md](LEARNINGS.md) - Insights from hackathon build
+- [DEPLOYMENT.md](DEPLOYMENT.md) - Local and cloud deployment guide
 
 ---
 
@@ -218,17 +174,18 @@ adversary-iq/
 
 ---
 
-## Author
+## License
 
-**Gregory E. Schwartz**
-- M.S. Artificial Intelligence (Yeshiva University)
-- MBA (Cornell University)
-
-<p align="center">
-  <a href="mailto:gregory.e.schwartz@gmail.com"><img src="https://img.shields.io/badge/Contact-Email-A78BFA?style=for-the-badge&logo=gmail&logoColor=white" /></a>
-  <a href="https://linkedin.com/in/gregory-e-schwartz"><img src="https://img.shields.io/badge/Connect-LinkedIn-A78BFA?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
-</p>
+MIT
 
 ---
 
-![Footer](https://capsule-render.vercel.app/api?type=rect&color=0D1B2A&height=30&section=footer)
+<div align="center">
+
+**Part of the AI/ML Portfolio**
+
+[GitHub](https://github.com/ges257) | [LinkedIn](https://linkedin.com/in/gregory-e-schwartz)
+
+</div>
+
+![Footer](https://capsule-render.vercel.app/api?type=rect&color=0D1B2A&height=40&section=footer)
