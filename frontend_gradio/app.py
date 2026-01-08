@@ -448,12 +448,12 @@ with gr.Blocks(title="AdversaryIQ - Intelligence Dossier", css=DOSSIER_CSS) as a
 
             <div style="text-align: right; margin-right: 20px;">
                 <div style="margin-bottom: 8px;">
-                    <span style="display: block; font-size: 9px; color: #888; letter-spacing: 2px;">DOCUMENT ID</span>
-                    <span style="font-size: 14px; font-weight: bold; letter-spacing: 2px;">AIQ-2026-001</span>
+                    <span style="display: block; font-size: 9px; color: #888; letter-spacing: 2px;">SYSTEM ID</span>
+                    <span style="font-size: 14px; font-weight: bold; letter-spacing: 2px;">AIQ-DEMO</span>
                 </div>
                 <div>
-                    <span style="display: block; font-size: 9px; color: #888; letter-spacing: 2px;">DATE</span>
-                    <span style="font-size: 14px; font-weight: bold; letter-spacing: 2px;">""" + datetime.now().strftime("%d %b %Y").upper() + """</span>
+                    <span style="display: block; font-size: 9px; color: #888; letter-spacing: 2px;">STATUS</span>
+                    <span style="font-size: 14px; font-weight: bold; letter-spacing: 2px; color: #006400;">OPERATIONAL</span>
                 </div>
             </div>
         </div>
