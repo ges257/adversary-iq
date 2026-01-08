@@ -1,7 +1,7 @@
 ---
 title: AdversaryIQ
 emoji: 🎯
-colorFrom: amber
+colorFrom: yellow
 colorTo: red
 sdk: gradio
 sdk_version: 4.0.0
